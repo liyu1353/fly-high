@@ -1,3 +1,5 @@
+import API_KEY from "flight.env";
+
 const express = require('express');
 const { getJson } = require('serpapi');
 const cors = require('cors');
@@ -13,11 +15,10 @@ app.get('/api/flights', async (req, res) => {
 
         const json = await getJson({
             engine: 'Google Flights',
-            api_key: '2e5c6e66d3f404b8df31158830e7a777e704a1507b50631a5730c90fa0023c4d', // Replace with your actual SerpApi key
+            api_key: API_KEY, // Replace with your actual SerpApi key
             departure_id,
             arrival_id,
             outbound_date,
-            // Add any other parameters you need
         });
 
         res.json(json);

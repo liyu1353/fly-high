@@ -1,3 +1,6 @@
+import display from "@/app/display";
+import API_KEY from "./flight.env";
+
 export default function Home() {
   return (
       <form action={submit}>
@@ -7,8 +10,6 @@ export default function Home() {
           <input type="text" id="to" name="to"/>
           <label htmlFor="dep">Departure Date</label>
           <input type="date" id="dep" name="dep"/>
-          <label htmlFor="ret">Return Date</label>
-          <input type="date" id="ret" name="ret"/>
           <input type="checkbox" id="lock" name="lock"/>
           <input type="submit" value="Submit"/>
       </form>
@@ -21,26 +22,20 @@ async function submit(formData) {
     const to = formData.get("to");
     //dates selected
     const dep = formData.get("dep");
-    const ret = formData.get("ret");
     //are the dates exact?
     const lock = formData.get("lock");
 
-    try {
-        const response = await fetch(
-            `http://localhost:3001/api/flights?departure_id=${departure}&arrival_id=${arrival}&outbound_date=${date}`
-        );
+    const { getJson } = require("serpapi");
 
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-
-        const data = await response.json();
-        setFlights(data.best_flights);
-        setError(null);
-    } catch (error) {
-        setError('Failed to fetch flight data.');
-        console.error('Error fetching data:', error);
-    }
-
-
+    await getJson({
+        engine: "google_flights",
+        departure_id: {from},
+        arrival_id: {to},
+        outbound_date: {dep},
+        currency: "USD",
+        hl: "en",
+        api_key: API_KEY,
+    }, (json) => {
+        return display(json);
+    });
 }
