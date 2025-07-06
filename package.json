@@ -1,0 +1,12 @@
+{
+  "name": "fly-high",
+  "version": "1.0.0",
+  "description": "Optimal Flight Tracker 1. webscrapes (or uses google flights API) to get the flights 2. delivers a rating to each flight based on categories",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
