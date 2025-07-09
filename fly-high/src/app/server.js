@@ -15,7 +15,7 @@ app.get('/api/flights', async (req, res) => {
 
         const json = await getJson({
             engine: 'Google Flights',
-            api_key: API_KEY, // Replace with your actual SerpApi key
+            api_key: API_KEY,
             departure_id,
             arrival_id,
             outbound_date,

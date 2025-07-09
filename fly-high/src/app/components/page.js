@@ -1,7 +1,7 @@
-import display from "@/app/display";
-import API_KEY from "./flight.env";
+import display from "@/app/components/display";
+import API_KEY from "../flight.env";
 
-export default function Home() {
+export default function HomePage() {
   return (
       <form action={submit}>
           <label htmlFor="from">From:</label>
