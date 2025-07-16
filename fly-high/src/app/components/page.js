@@ -1,5 +1,5 @@
-import display from "@/app/components/display";
 import API_KEY from "../flight.env";
+import FlightsList from "@/app/components/display";
 
 export default function HomePage() {
   return (
@@ -36,6 +36,6 @@ async function submit(formData) {
         hl: "en",
         api_key: API_KEY,
     }, (json) => {
-        return display(json);
+        return FlightsList(json);
     });
 }

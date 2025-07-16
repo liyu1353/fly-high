@@ -1,0 +1,45 @@
+import React from 'react';
+
+// This component receives a single flight object via props
+const FlightCard = ({ flight }) => {
+    // Destructuring for easier access to nested data
+    const firstLeg = flight.flights[0];
+    const { departure_airport, arrival_airport, airline, airline_logo } = firstLeg;
+
+    // A helper function to format duration from minutes to hours and minutes
+    const formatDuration = (totalMinutes) => {
+        const hours = Math.floor(totalMinutes / 60);
+        const minutes = totalMinutes % 60;
+        return `${hours}h ${minutes}m`;
+    };
+
+    return (
+        <div style={{ border: '1px solid #ccc', padding: '16px', margin: '16px 0', borderRadius: '8px' }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+                <div>
+                    <img src={airline_logo} alt={`${airline} logo`} style={{ width: '30px', height: '30px', marginRight: '10px' }} />
+                    <strong>{airline}</strong>
+                </div>
+                <div style={{ textAlign: 'right' }}>
+                    <div style={{ fontSize: '1.5em', fontWeight: 'bold' }}>${flight.price}</div>
+                    <div>Total duration: {formatDuration(flight.total_duration)}</div>
+                </div>
+            </div>
+
+            <div style={{ marginTop: '16px', display: 'flex', justifyContent: 'space-around' }}>
+                <div>
+                    <p><strong>Depart</strong></p>
+                    <p>{departure_airport.time}</p>
+                    <p>{departure_airport.id}</p>
+                </div>
+                <div>
+                    <p><strong>Arrive</strong></p>
+                    <p>{arrival_airport.time}</p>
+                    <p>{arrival_airport.id}</p>
+                </div>
+            </div>
+        </div>
+    );
+};
+
+export default FlightCard;
