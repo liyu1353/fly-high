@@ -16,8 +16,9 @@ export default function HomePage() {
   );
 }
 
-async function submit(formData) {
+async function submit(FormEvent) {
     //airport destinations
+    const formData = new FormData(FormEvent.target);
     const from = formData.get("from");
     const to = formData.get("to");
     //dates selected
@@ -36,6 +37,10 @@ async function submit(formData) {
         hl: "en",
         api_key: API_KEY,
     }, (json) => {
-        return FlightsList(json);
+        return(
+            <section>
+                <FlightsList flightData = {json}/>
+            </section>
+        );
     });
 }

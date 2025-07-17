@@ -1,12 +1,9 @@
 import React from 'react';
 
-// This component receives a single flight object via props
 const FlightCard = ({ flight }) => {
-    // Destructuring for easier access to nested data
     const firstLeg = flight.flights[0];
     const { departure_airport, arrival_airport, airline, airline_logo } = firstLeg;
 
-    // A helper function to format duration from minutes to hours and minutes
     const formatDuration = (totalMinutes) => {
         const hours = Math.floor(totalMinutes / 60);
         const minutes = totalMinutes % 60;
