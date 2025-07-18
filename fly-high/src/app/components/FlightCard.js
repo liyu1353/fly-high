@@ -2,6 +2,7 @@ import React from 'react';
 
 const FlightCard = ({ flight }) => {
     const firstLeg = flight.flights[0];
+    const price = flight.price;
     const { departure_airport, arrival_airport, airline, airline_logo } = firstLeg;
 
     const formatDuration = (totalMinutes) => {
@@ -19,7 +20,7 @@ const FlightCard = ({ flight }) => {
                 </div>
                 <div style={{ textAlign: 'right' }}>
                     <div style={{ fontSize: '1.5em', fontWeight: 'bold' }}>${flight.price}</div>
-                    <div>Total duration: {formatDuration(flight.total_duration)}</div>
+                    <div>Score: {calcScore(flight)}</div>
                 </div>
             </div>
 
@@ -38,5 +39,29 @@ const FlightCard = ({ flight }) => {
         </div>
     );
 };
+
+function calcScore({ flight }){
+    //compare price with max? min?
+    var priceScore = 0;
+    const maxPrice = parseInt(localStorage.getItem("maxPrice"));
+    const minPrice = parseInt(localStorage.getItem("minPrice"));
+    const airline = localStorage.getItem("airline");
+
+    if(maxPrice >= flight.price && minPrice <= flight.price){
+        priceScore = 100;
+    }else if(maxPrice < flight.price){
+        priceScore = 100 - (flight.price - maxPrice)/50;
+    }else if(minPrice > flight.price){
+        priceScore = 100 - (minPrice - flight.price)/50;
+    }
+    //compare airline
+    var airlineScore = 0;
+    if(flight.airline.toLowerCase() === airline.toLowerCase()){
+        airlineScore = 100;
+    }
+
+    return priceScore * 0.7 + airlineScore * 0.3;
+
+}
 
 export default FlightCard;
