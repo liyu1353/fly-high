@@ -11,9 +11,9 @@ export default function Options(){
     function storeChoices(FormData) {
         const formData = new FormData(FormData.target);
         //set local storage of Options
-        localStorage.setItem("airline", JSON.stringify(formData.get("airline")));
-        localStorage.setItem("maxPrice", JSON.stringify(formData.get("maxPrice")));
-        localStorage.setItem("minPrice", JSON.stringify(formData.get("minPrice")));
+        sessionStorage.setItem("airline", JSON.stringify(formData.get("airline")));
+        sessionStorage.setItem("maxPrice", JSON.stringify(formData.get("maxPrice")));
+        sessionStorage.setItem("minPrice", JSON.stringify(formData.get("minPrice")));
     }
 
     return (

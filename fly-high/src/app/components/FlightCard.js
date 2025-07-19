@@ -1,6 +1,7 @@
 import React from 'react';
 
 const FlightCard = ({ flight }) => {
+    //flight is a json file
     const firstLeg = flight.flights[0];
     const price = flight.price;
     const { departure_airport, arrival_airport, airline, airline_logo } = firstLeg;
@@ -43,16 +44,16 @@ const FlightCard = ({ flight }) => {
 function calcScore({ flight }){
     //compare price with max? min?
     var priceScore = 0;
-    const maxPrice = parseInt(localStorage.getItem("maxPrice"));
-    const minPrice = parseInt(localStorage.getItem("minPrice"));
-    const airline = localStorage.getItem("airline");
+    const maxPrice = parseInt(sessionStorage.getItem("maxPrice"));
+    const minPrice = parseInt(sessionStorage.getItem("minPrice"));
+    const airline = sessionStorage.getItem("airline");
 
     if(maxPrice >= flight.price && minPrice <= flight.price){
         priceScore = 100;
     }else if(maxPrice < flight.price){
         priceScore = 100 - (flight.price - maxPrice)/50;
     }else if(minPrice > flight.price){
-        priceScore = 100 - (minPrice - flight.price)/50;
+        priceScore = 100 + (minPrice - flight.price)/100;
     }
     //compare airline
     var airlineScore = 0;
